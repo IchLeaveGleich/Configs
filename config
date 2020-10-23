@@ -8,7 +8,7 @@ set $mod Mod4
 # workspace_layout tabbed <stacking|tabbed>
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-default_border pixel 1
+default_border pixel 2
 default_floating_border normal
 
 # Hide borders
@@ -26,7 +26,7 @@ font xft:URWGothic-Book 11
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec terminal
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -44,7 +44,7 @@ bindsym $mod+z exec --no-startup-id morc_menu
 #exec --no-startup-id volumeicon
 #bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 exec --no-startup-id start-pulseaudio-x11
-exec --no-startup-id pa-applet
+exec --no-startup-id pa-applet --disable-notifications
 bindsym $mod+Ctrl+m exec pavucontrol
 
 ################################################################################################
@@ -54,12 +54,12 @@ bindsym $mod+Ctrl+m exec pavucontrol
 # bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
 # Start Applications
-bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
+bindsym $mod+Ctrl+b exec alacritty bmenu
 bindsym $mod+F2 exec chromium
 bindsym $mod+F3 exec pcmanfm
 # bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec pcmanfm_pkexec
-bindsym $mod+F5 exec terminal -e 'mocp'
+bindsym $mod+F5 exec alacritty -e mocp
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
@@ -70,9 +70,9 @@ bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 #Numpad start
-bindsym $mod+KP_End exec terminal -e "vim /home/david/Dokumente/"
-bindsym $mod+KP_Down exec terminal -e "vim /home/david/.i3/config"
-bindsym $mod+KP_Next exec terminal -e "vim /home/david/.vimrc"
+bindsym $mod+KP_End exec alacritty -e vim /home/david/Dokumente/
+bindsym $mod+KP_Down exec alacritty -e vim /home/david/.i3/config
+bindsym $mod+KP_Next exec alacritty -e vim /home/david/.vimrc
 bindsym $mod+KP_Left exec pamac-manager
 bindsym $mod+KP_Begin exec spotify
 bindsym $mod+KP_Right exec teams
@@ -80,7 +80,7 @@ bindsym $mod+KP_Home exec virt-manager
 bindsym $mod+KP_Up exec discord
 
 
-# focus_follows_mouse no
+focus_follows_mouse no
 
 # change focus
 bindsym $mod+h focus left
@@ -153,7 +153,7 @@ bindsym $mod+Ctrl+Left workspace prev
 #                 set $ws2 2:
 set $ws1 "1:Chrome: "
 set $ws2 "2:Terminal: "
-set $ws3 "3:Code: "
+set $ws3 "3:Code: "
 set $ws4 "4:Spotify: "
 set $ws5 "5:Discord: "
 set $ws6 "6:Teams: "
@@ -261,28 +261,33 @@ mode "$mode_system" {
 }
 
 # Resize window (you can also use the mouse for that)
-bindsym $mod+r mode "resize"
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 5 px or 5 ppt
-        bindsym j resize grow height 5 px or 5 ppt
-        bindsym k resize shrink height 5 px or 5 ppt
-        bindsym l resize grow width 5 px or 5 ppt
+bindsym Mod1+h resize shrink width 5 px or 5 ppt
+bindsym Mod1+j resize grow height 5 px or 5 ppt
+bindsym Mod1+k resize shrink height 5 px or 5 ppt
+bindsym Mod1+l resize grow width 5 px or 5 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # exit resize mode: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
+#bindsym $mod+r mode "resize"
+#mode "resize" {
+#        # These bindings trigger as soon as you enter the resize mode
+#        # Pressing left will shrink the window’s width.
+#        # Pressing right will grow the window’s width.
+#        # Pressing up will shrink the window’s height.
+#        # Pressing down will grow the window’s height.
+#        bindsym h resize shrink width 5 px or 5 ppt
+#        bindsym j resize grow height 5 px or 5 ppt
+#        bindsym k resize shrink height 5 px or 5 ppt
+#        bindsym l resize grow width 5 px or 5 ppt
+#
+#        # same bindings, but for the arrow keys
+#        bindsym Left resize shrink width 10 px or 10 ppt
+#        bindsym Down resize grow height 10 px or 10 ppt
+#        bindsym Up resize shrink height 10 px or 10 ppt
+#        bindsym Right resize grow width 10 px or 10 ppt
+#
+#        # exit resize mode: Enter or Escape
+#        bindsym Return mode "default"
+#        bindsym Escape mode "default"
+#}
 
 # Lock screen
 bindsym $mod+9 exec --no-startup-id blurlock
@@ -340,6 +345,7 @@ bar {
 	i3bar_command i3bar
 	status_command i3blocks -c ~/.config/i3blocks/i3blocks.conf
 	position top
+    separator_symbol " "
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
 #	tray_output primary
@@ -367,7 +373,6 @@ bar {
 bindsym $mod+m bar mode toggle
 
 # Theme colors
-# class                   border  backgr. text    indic.   child_border
 # class                 border  bground text    indicator child_border
 client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
 client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
