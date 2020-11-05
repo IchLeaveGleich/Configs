@@ -1,5 +1,6 @@
 # i3 config file (v4)
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
+exec setxkbmap -layout de
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
@@ -54,7 +55,6 @@ bindsym $mod+Ctrl+m exec pavucontrol
 # bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
 # Start Applications
-bindsym $mod+Ctrl+b exec alacritty bmenu
 bindsym $mod+F2 exec chromium
 bindsym $mod+F3 exec pcmanfm
 # bindsym $mod+F3 exec ranger
@@ -63,21 +63,18 @@ bindsym $mod+F5 exec alacritty -e mocp
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym Print exec --no-startup-id i3-scrot
-bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
-bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
-#bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
+bindsym Print exec --no-startup-id scrot
+bindsym $mod+Print --release exec --no-startup-id scrot -w
+bindsym $mod+Shift+Print --release exec --no-startup-id scrot -s
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 #Numpad start
 bindsym $mod+KP_End exec alacritty -e vim /home/david/Dokumente/
-bindsym $mod+KP_Down exec alacritty -e vim /home/david/.i3/config
+bindsym $mod+KP_Down exec alacritty -e vim /home/david/.config/i3/config
 bindsym $mod+KP_Next exec alacritty -e vim /home/david/.vimrc
-bindsym $mod+KP_Left exec pamac-manager
-bindsym $mod+KP_Begin exec spotify
-bindsym $mod+KP_Right exec teams
-bindsym $mod+KP_Home exec virt-manager
-bindsym $mod+KP_Up exec discord
+bindsym $mod+KP_Left exec spotify
+bindsym $mod+KP_Begin exec virt-manager
+bindsym $mod+KP_Right exec discord
 
 
 focus_follows_mouse no
@@ -151,12 +148,12 @@ bindsym $mod+Ctrl+Left workspace prev
 # to display names or symbols instead of plain workspace numbers you can use
 # something like: set $ws1 1:mail
 #                 set $ws2 2:
-set $ws1 "1:Chrome: "
-set $ws2 "2:Terminal: "
-set $ws3 "3:Code: "
-set $ws4 "4:Spotify: "
-set $ws5 "5:Discord: "
-set $ws6 "6:Teams: "
+set $ws1 "1:Chrome:  "
+set $ws2 "2:Terminal:  "
+set $ws3 "3:Code:  " 
+set $ws4 "4:Spotify:  "
+set $ws5 "5:Discord:  "
+set $ws6 6
 set $ws7 7
 set $ws8 8
 
@@ -196,9 +193,7 @@ bindsym $mod+mod1+l move workspace to output right
 
 # Open applications on specific workspaces
 assign [class="Chromium"] $ws1
-assign [class="^Spotify*"] $ws4
 assign [class="discord"] $ws5
-# assign [class="Skype"] $ws5
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
@@ -211,25 +206,21 @@ for_window [class="GParted"] floating enable border normal
 for_window [title="i3_help"] floating enable sticky enable border normal
 for_window [class="Lightdm-settings"] floating enable
 for_window [class="Lxappearance"] floating enable sticky enable border normal
-for_window [class="Manjaro-hello"] floating enable
-for_window [class="Manjaro Settings Manager"] floating enable border normal
 for_window [title="MuseScore: Play Panel"] floating enable
 for_window [class="Nitrogen"] floating enable sticky enable border normal
 for_window [class="Oblogout"] fullscreen enable
 for_window [class="octopi"] floating enable
-for_window [title="About Pale Moon"] floating enable
-for_window [class="Pamac-manager"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="qt5ct"] floating enable sticky enable border normal
 for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
 for_window [class="Simple-scan"] floating enable border normal
 for_window [class="(?i)System-config-printer.py"] floating enable border normal
-for_window [class="Skype"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
-for_window [class="(?i)virtualbox"] floating enable border normal
-for_window [class="Xfburn"] floating enable
 for_window [class="Virt-manager"] floating enable border normal
+
+
 for_window [class="Spotify"] move to workspace $ws4
+
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -244,21 +235,21 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Set shut down, restart and locking features
-bindsym $mod+0 mode "$mode_system"
-set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
-mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
-    bindsym s exec --no-startup-id i3exit suspend, mode "default"
-    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
-    bindsym e exec --no-startup-id i3exit logout, mode "default"
-    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
-
-    # exit system mode: "Enter" or "Escape"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
+#bindsym $mod+0 mode "$mode_system"
+#set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+#mode "$mode_system" {
+#    bindsym l exec --no-startup-id i3exit lock, mode "default"
+#    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+#    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
+#    bindsym e exec --no-startup-id i3exit logout, mode "default"
+#    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+#    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+#    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+#
+#    # exit system mode: "Enter" or "Escape"
+#    bindsym Return mode "default"
+#    bindsym Escape mode "default"
+#}
 
 # Resize window (you can also use the mouse for that)
 bindsym Mod1+h resize shrink width 5 px or 5 ppt
@@ -294,20 +285,20 @@ bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep 1; compton -b
+#exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 #exec --no-startup-id manjaro-hello
-exec --no-startup-id nm-applet
-exec --no-startup-id xfce4-power-manager
-exec --no-startup-id pamac-tray
-exec --no-startup-id clipit
+#exec --no-startup-id nm-applet
+#exec --no-startup-id xfce4-power-manager
+#exec --no-startup-id pamac-tray
+#exec --no-startup-id clipit
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 #exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
-exec picom -b
+exec --no-startup-id picom -b --config /home/david/.config/picom/picom.conf
 exec --no-startup-id xautolock -time 10 -locker blurlock
-exec_always --no-startup-id ff-theme-util
-exec_always --no-startup-id fix_xcursor
+#exec_always --no-startup-id ff-theme-util
+#exec_always --no-startup-id fix_xcursor
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
@@ -346,6 +337,7 @@ bar {
 	status_command i3blocks -c ~/.config/i3blocks/i3blocks.conf
 	position top
     separator_symbol " "
+    font pango: SauceCodePro Nerd Font 10
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
 #	tray_output primary
