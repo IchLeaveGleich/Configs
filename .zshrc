@@ -26,5 +26,3 @@ alias grep="grep --color=auto"
 bindkey ";5C" forward-word
 bindkey ";5D" backward-word
 
-alias clear="clear && neofetch"
-neofetch
