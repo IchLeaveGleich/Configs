@@ -138,11 +138,16 @@ label-separator-foreground = ${colors.foreground}
 menu-0-0 = 
 menu-0-0-exec = systemctl reboot
 menu-0-0-foreground = ${colors.foreground}
+; sleep
+menu-0-1 = 
+menu-0-1-exec = systemctl suspend
+menu-0-1-foreground = ${colors.foreground}
+
 ; shutdown
 
-menu-0-1 =  
-menu-0-1-exec = systemctl poweroff
-menu-0-1-foreground = ${colors.primary}
+menu-0-2 =  
+menu-0-2exec = systemctl poweroff
+menu-0-2-foreground = ${colors.primary}
 
 [module/player-mpris-simple]
 type = custom/script
