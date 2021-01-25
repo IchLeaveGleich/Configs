@@ -186,8 +186,6 @@ bindsym $mod+mod1+l move workspace to output right
 assign [class="brave"] $ws1
 
 for_window [class="Spotify"] move to workspace $ws3
-for_window [class="Discord"] move to workspace $ws5
-for_window [class="Teams"] move to workspace $ws4
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
