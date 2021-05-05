@@ -1,3 +1,6 @@
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
 autoload -U colors && colors
 
 HISTSIZE=10000
@@ -21,6 +24,8 @@ source ~/.zsh/themes/dracula.zsh-theme
 
 alias ls="ls --color=auto"
 alias grep="grep --color=auto"
+
+alias ssh="TERM=xterm-256color ssh"
 
 
 bindkey ";5C" forward-word

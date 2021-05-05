@@ -21,12 +21,10 @@ set splitbelow
 set hidden
 set wildmenu
 
-
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
@@ -53,8 +51,5 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 nnoremap <F6> :NERDTreeToggle<CR>
-
-nnoremap <leader>kc :!kotlinc % -include-runtime -d 
-nnoremap <leader>kr :!java -jar 
 
 nnoremap <leader>rp :!python3 %<CR>

@@ -146,7 +146,7 @@ menu-0-1-foreground = ${colors.foreground}
 ; shutdown
 
 menu-0-2 =  
-menu-0-2exec = systemctl poweroff
+menu-0-2-exec = systemctl poweroff
 menu-0-2-foreground = ${colors.primary}
 
 [module/player-mpris-simple]
